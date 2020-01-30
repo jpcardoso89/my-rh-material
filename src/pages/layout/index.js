@@ -86,7 +86,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     flex: 1,
     padding: theme.spacing(3),
-    height: "100vh",
+
     background: "#eeeeee"
   }
 }));
@@ -179,11 +179,7 @@ export default function Layout(props) {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Container maxWidth="xl">
-          <Paper>
-            <Box padding={5}>{props.children}</Box>
-          </Paper>
-        </Container>
+        <Container maxWidth="xl">{props.children}</Container>
       </main>
     </div>
   );

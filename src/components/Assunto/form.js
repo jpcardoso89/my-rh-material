@@ -22,14 +22,16 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-export default function AssuntoForm() {
+export default function AssuntoForm({ onUpdate }) {
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = data => {
     data.id = getRandomInt(1, 1000);
     const meusAssuntos = JSON.parse(localStorage.getItem("assuntos"));
     if (meusAssuntos) {
-      localStorage.setItem("assuntos", JSON.stringify([...meusAssuntos, data]));
+      const assuntosAtualizados = [...meusAssuntos, data];
+      localStorage.setItem("assuntos", JSON.stringify(assuntosAtualizados));
+      onUpdate(assuntosAtualizados);
     } else {
       localStorage.setItem("assuntos", JSON.stringify([data]));
     }

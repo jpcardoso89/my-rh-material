@@ -1,40 +1,27 @@
 import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import RequerimentoForm from "../../components/requerimento-form";
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary
-  }
-});
+import RequerimentoForm from "../../components/Requerimento/form";
 
 class Requerimento extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      assuntos: []
-    };
+    this.assuntos = [];
   }
 
-  componentDidMount() {
+  loadAssuntos() {
     const assuntos = localStorage.getItem("assuntos");
     if (assuntos) {
-      this.setState({ assuntos: JSON.parse(assuntos) });
+      this.assuntos = JSON.parse(assuntos);
     }
   }
 
   render() {
+    this.loadAssuntos();
     return (
       <>
-        <RequerimentoForm assuntos={this.state.assuntos} />
+        <RequerimentoForm assuntos={this.assuntos} />
       </>
     );
   }
 }
 
-export default withStyles(styles)(Requerimento);
+export default Requerimento;
