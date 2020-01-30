@@ -86,7 +86,6 @@ const useStyles = makeStyles(theme => ({
   content: {
     flex: 1,
     padding: theme.spacing(3),
-
     background: "#eeeeee"
   }
 }));
