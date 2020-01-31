@@ -17,7 +17,7 @@ export default function AssuntoTable({ assuntos }) {
       columns={getCollumnsNames()}
       data={assuntos.map(assunto => ({
         assunto: assunto.assunto,
-        ativo: assunto.ativo ? "sim" : "não"
+        ativo: assunto.ativo ? "Sim" : "Não"
       }))}
     />
   ) : null;

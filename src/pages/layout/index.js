@@ -17,8 +17,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import AddBoxOutlinedIcon from "@material-ui/icons/AddBoxOutlined";
 import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
 import Tooltip from "@material-ui/core/Tooltip";
-import Box from "@material-ui/core/Box";
-import { Paper, Container } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import ListItemLink from "../../components/ListItemLink";
 import SubjectOutlinedIcon from "@material-ui/icons/SubjectOutlined";
 
@@ -85,8 +84,9 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flex: 1,
-    padding: theme.spacing(3),
-    background: "#eeeeee"
+    padding: "100px 24px 24px",
+    background: "#eeeeee",
+    minHeight: "100vh"
   }
 }));
 
@@ -177,7 +177,6 @@ export default function Layout(props) {
         </List>
       </Drawer>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
         <Container maxWidth="xl">{props.children}</Container>
       </main>
     </div>
