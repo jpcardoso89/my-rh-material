@@ -45,6 +45,7 @@ const RequerimentoForm = ({ assuntos }) => {
     alert(JSON.stringify(data));
   };
 
+  console.log(assuntos);
   return (
     <Paper>
       <Box padding={5}>
@@ -69,6 +70,7 @@ const RequerimentoForm = ({ assuntos }) => {
                             checked={assunto.id === assuntoValue}
                             value={assunto.id}
                             name="assuntoId"
+                            disabled={!assunto.ativo}
                             inputRef={register({ required: true })}
                             control={<Radio />}
                             label={assunto.assunto}

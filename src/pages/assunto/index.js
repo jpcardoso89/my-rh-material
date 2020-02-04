@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AssuntoForm from "../../components/Assunto/form";
 import AssuntoTable from "../../components/Assunto/table";
+import Mensagem from "../../components/Mensagem";
 import { Paper, Box } from "@material-ui/core";
 
 export default class Assunto extends Component {
@@ -8,7 +9,12 @@ export default class Assunto extends Component {
     super(props);
 
     this.state = {
-      assuntos: []
+      assuntos: [],
+      mensagem: {
+        open: false,
+        msg: "",
+        severity: "success"
+      }
     };
   }
   componentDidMount() {
@@ -18,20 +24,48 @@ export default class Assunto extends Component {
     }
   }
 
-  handleUpdateState = assuntos => {
+  handleUpdateAssunto = assuntos => {
+    console.log(assuntos);
+    localStorage.setItem("assuntos", JSON.stringify(assuntos));
     this.setState({ assuntos: assuntos });
+  };
+
+  handleUpdateMensagem = mensagem => {
+    this.setState({
+      mensagem: {
+        open: true,
+        msg: mensagem.msg,
+        severity: mensagem.severity
+      }
+    });
+  };
+
+  handleCloseMensagem = (event, reason) => {
+    this.setState(prevState => ({
+      mensagem: {
+        open: false
+      }
+    }));
   };
 
   render() {
     return (
       <>
+        <Mensagem {...this.state.mensagem} onClose={this.handleCloseMensagem} />
         <Paper>
           <Box padding={5}>
-            <AssuntoForm onUpdate={this.handleUpdateState} />
+            <AssuntoForm
+              onUpdateAssuntos={this.handleUpdateAssunto}
+              onUpdateMensagem={this.handleUpdateMensagem}
+            />
           </Box>
         </Paper>
         <Box marginTop={3}>
-          <AssuntoTable assuntos={this.state.assuntos} />
+          <AssuntoTable
+            assuntos={this.state.assuntos}
+            onUpdateAssuntos={this.handleUpdateAssunto}
+            onUpdateMensagem={this.handleUpdateMensagem}
+          />
         </Box>
       </>
     );

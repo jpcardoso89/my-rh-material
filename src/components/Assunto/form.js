@@ -1,7 +1,6 @@
 import React from "react";
 import SaveIcon from "@material-ui/icons/Save";
 import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
-
 import {
   TextField,
   Grid,
@@ -15,6 +14,7 @@ import {
   Checkbox
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
+import removerAcentos from "../../util/removeAcentos";
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -22,21 +22,23 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-export default function AssuntoForm({ onUpdate }) {
+export default function AssuntoForm({ onUpdateAssuntos, onUpdateMensagem }) {
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = data => {
     data.id = getRandomInt(1, 1000);
+    data.assunto = removerAcentos(data.assunto);
     const meusAssuntos = JSON.parse(localStorage.getItem("assuntos"));
     if (meusAssuntos) {
-      const assuntosAtualizados = [...meusAssuntos, data];
-      localStorage.setItem("assuntos", JSON.stringify(assuntosAtualizados));
-      onUpdate(assuntosAtualizados);
+      onUpdateAssuntos([...meusAssuntos, data]);
     } else {
-      localStorage.setItem("assuntos", JSON.stringify([data]));
+      onUpdateAssuntos([data]);
     }
     reset();
-    console.log(data);
+    onUpdateMensagem({
+      msg: "Assunto salvo com sucesso!",
+      severity: "success"
+    });
   };
 
   return (
