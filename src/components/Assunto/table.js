@@ -1,8 +1,6 @@
 import React from "react";
 import MaterialTable from "material-table";
-import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 import Capitalize from "../../util/capitalize";
-import blueGrey from "@material-ui/core/colors/blueGrey";
 import Switch from "@material-ui/core/Switch";
 
 export default function AssuntoTable({
